@@ -1,0 +1,20 @@
+.table-container {
+    width: 100%; /* Set the width of the container */
+    overflow-x: auto; /* Enable horizontal scrolling if necessary */
+  }
+  
+  .table-container table {
+    width: auto; /* Allow the table to expand horizontally as needed */
+    table-layout: fixed; /* Fix the table layout */
+  }
+  
+  .table-container th,
+  .table-container td {
+    width: 200px; /* Set the desired width for columns */
+  }
+  /* Custom hover effect */
+.btn-primary:hover {
+  background-color: #0062cc; /* Change the background color on hover */
+  color: #fff; /* Change the text color on hover */
+  /* Add any other custom styles here */
+}

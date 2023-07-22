@@ -1,0 +1,33 @@
+.navbar{
+    padding: 1rem 5rem !important;
+}
+.felxNav{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+.navbar-brand{
+    font-size: 1.5rem;
+    font-weight:900;
+    color: whitesmoke;
+    margin-right: 3rem;
+}
+.navbar-brand::first-letter{
+    color: #287bff;
+}
+.nav-link{
+    color: #287bff !important;
+    text-align: center;
+    font-size: larger;
+}
+.nav-item:hover .nav-link{
+    transition: all 0.2s !important;
+    color: whitesmoke !important;
+    border-radius: 4px !important;
+}
+.navbar-toggler-icon{
+    color: #287bff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

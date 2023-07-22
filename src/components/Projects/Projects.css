@@ -1,0 +1,127 @@
+@media (max-width: 576px){
+    .parent {
+      margin: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: 1fr;
+      grid-column-gap: 30px;
+      grid-row-gap: 30px;
+      
+    }
+  }
+  @media (min-width: 577px){
+    .parent {
+      margin: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: 1fr;
+      grid-column-gap: 30px;
+      grid-row-gap: 30px;
+      
+    }
+  }
+  @media (min-width: 768px){
+    .parent {
+      margin: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr;
+      grid-column-gap: 30px;
+      grid-row-gap: 30px;
+      
+    }
+  }
+  @media (min-width: 992px){
+    .parent {
+      margin: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr;
+      grid-column-gap: 30px;
+      grid-row-gap: 30px;
+      
+    }
+  }
+  @media (min-width: 1440px){
+    .parent {
+      margin: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: 1fr;
+      grid-column-gap: 30px;
+      grid-row-gap: 30px;
+      
+    }
+  }
+  .parent form img{
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  border-radius: 5px;
+  }
+  .parent{
+    margin-bottom: 4rem;
+  }
+  .proForm{
+    position: relative !important;
+    border-radius: 5px !important;
+    transition: all 0.2s !important;
+
+  } 
+  .proTitle{
+    transition: all 0.2s !important;
+    width: max-content;
+  }
+  .proForm:hover + p{
+    transform: translateX(4rem);
+    font-weight: 900;
+    color: #287bff;
+  }
+  .proForm::before{
+    content: '' !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: #111111d9 !important;
+    border-radius: 5px !important;
+    transition: all 0.2s !important;
+    opacity: 0 !important;
+  } 
+  .proForm.op{
+    transform: translateY(-4px) !important;
+  }
+  .proForm.op::before{
+    opacity: 1 !important;
+  }
+  .proForm.op .btnmo{
+    opacity: 1 !important;
+  }
+  .proForm .btnmo{
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    outline: none !important;
+      background-color: #11111100 !important;
+      color: #fff !important;
+      padding: 0.4rem !important;
+      width: 5rem !important;
+      border-radius: 5px !important;
+      border: 1px solid !important;
+      opacity: 0 !important;
+      text-align: center !important;
+  }
+  .btnmo:hover{
+    background-color: #0866C6 !important;
+    transition: all 0.2s !important;
+    cursor: pointer !important;
+  }
+  #no-project{
+      font-size: x-large !important;
+      box-shadow: 0px 3px 12px 5px #f5f5f512 !important;
+      padding: 1rem !important;
+      width: 100% !important;
+      border-radius: 6px !important;
+      margin: 0 auto !important;
+      text-align: center !important;
+    }
