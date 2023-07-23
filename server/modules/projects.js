@@ -9,7 +9,7 @@ const projectsSchema = new mongoose.Schema({
     srcLink: String,
     shownText: String,
     coverImg: String,
-    images: Array
+    images: [{type: String}]
 })
 
 const projectsModel = mongoose.model("projects", projectsSchema);

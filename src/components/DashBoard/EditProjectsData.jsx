@@ -11,20 +11,7 @@ const EditProjectsData = () => {
   const [srcLink, setSrcLink] = useState('')
   const [shownText, setShownText] = useState('')
   const [coverImg, setCoverImg] = useState('')
-//   const [images, setImages] = useState([])
-
   const navigate = useNavigate();
-
-
-
-
-
-
-
-
-
-
-
 // file upload function
 // file upload function
 // file upload function
@@ -100,26 +87,9 @@ const handleUploads = (e) => {
         console.error('Error uploading the file:', error);
       });
   };
-  
-
-
-
-
 // file upload function
 // file upload function
 // file upload function
-
-
-
-
-
-//  useEffect(() => {
-    // This will log the updated imagesFiles value whenever it changes
-    // console.log(imagesFiles[0]);
-//   }, [imagesFiles]);
-
-
-
   useEffect(() => {
       axios.get("http://localhost:3001/projectsdata")
         .then((result) => {
@@ -195,11 +165,6 @@ const handleUploads = (e) => {
                             <label className='text-dark'>Shown text</label>
                             <input onChange={(e)=>{setShownText(e.target.value)}} value={shownText} type="text" className="form-control" />
                         </div>                      
-                      
-
-
-
-
                         <br />
                         <div className="mb-2">
                           <label className='text-dark'>Choose Cover image</label>
@@ -207,10 +172,9 @@ const handleUploads = (e) => {
                           <input className='text-dark' type="file" onChange={handleCoverFileChange} />
                           <button className='text-dark' onClick={handleUpload}>Upload</button>
                         </div>
-                        
                         <br />
                         <div className="mb-2">
-                          <label className='text-dark'>Choose Personal image</label>
+                          <label className='text-dark'>Choose Project images</label>
                           <input value={"The files now are: " + imagesFiles} type="text" className="form-control" disabled/>
                           <input multiple className='text-dark' type="file" onChange={handleImagesFileChange} />
                           <button className='text-dark' onClick={handleUploads}>Upload</button>

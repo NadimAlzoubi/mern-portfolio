@@ -21,6 +21,7 @@ import SkillsData from './components/DashBoard/SkillsData'
 import AddSkillsData from './components/DashBoard/AddSkillsData'
 import EditSkillsData from './components/DashBoard/EditSkillsData'
 import ProjectsData from './components/DashBoard/ProjectsData'
+import AddProjectsData from './components/DashBoard/AddProjectsData'
 import EditProjectsData from './components/DashBoard/EditProjectsData'
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route path='/projects' element={<Projects/>}></Route>
           <Route path='/ProjectDetails' element={<ProjectDetails/>}></Route>
           <Route path='/contact' element={<Contact/>}></Route>
+          
           <Route path='/dash' element={<Dash/>}></Route>
           <Route path='/updatedata/:id' element={<EditDash/>}></Route>
           <Route path='/resumedash' element={<ResumeData/>}></Route>
@@ -43,6 +45,7 @@ function App() {
           <Route path='/addskillsdash' element={<AddSkillsData/>}></Route>
           <Route path='/updateskillsdata/:id' element={<EditSkillsData/>}></Route>
           <Route path='/projectsdash' element={<ProjectsData/>}></Route>
+          <Route path='/addprojectsdash' element={<AddProjectsData/>}></Route>
           <Route path='/updateprojectdata/:id' element={<EditProjectsData/>}></Route>
 
           <Route path="*" element={<Error />} />

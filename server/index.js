@@ -389,13 +389,39 @@ app.delete('/deleteskillsdata/:id', async (req, res) => {
                                           //////
                                           //////
                                           //////
+  // projects C
 
-
-
-
-
-
-
+  app.put('/addprojectdata', async (req, res) => {
+    const {
+      title,
+      summry,
+      description,
+      date,
+      srcLink,
+      shownText,
+      coverImg,
+      imagesFiles
+    } = req.body;
+    try {
+      // Create a new document using the 'resumeModel'
+      const newProjectData = new projectsModel({
+        title,
+        summry,
+        description,
+        date,
+        srcLink,
+        shownText,
+        coverImg,
+        imagesFiles
+      });
+      // Save the new document to the database
+      const result = await newProjectData.save();
+      res.status(201).json({ message: 'Data inserted successfully', data: result });
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to insert data', error: error.message });
+    }
+  });
+                                          
 
 // projects R
 app.get('/projectsData', (req, res)=>{

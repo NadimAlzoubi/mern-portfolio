@@ -46,7 +46,7 @@ return (
           <React.Fragment key={project._id}>
           <div>
             <div className="proForm">
-              <img src={"/server/uploads/" + project.coverImg} alt="Project Cover Img" />
+              <img className='proimgasp' src={"/server/uploads/" + project.coverImg} alt="Project Cover Img" />
               <Link to={'/projectDetails?projectId=' + btoa(project._id)} className="btnmo">View</Link>
             </div>
             <p className="proTitle">{project.title}</p>

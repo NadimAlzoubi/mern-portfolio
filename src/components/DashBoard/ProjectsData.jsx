@@ -82,7 +82,7 @@ const ProjectsData = () => {
               </tr>
               <tr>
                 <td>Description</td>
-                <td>{record.per}</td>
+                <td>{record.description}</td>
               </tr>
               <tr>
                 <td>launch date</td>
