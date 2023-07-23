@@ -21,11 +21,8 @@ function connectWithRetry() {
     });
 }
 connectWithRetry();
-
-
 const multer = require('multer')
 const path = require('path')
-
 // Define the storage for multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -38,11 +35,6 @@ const storage = multer.diskStorage({
     },
   });
   const upload = multer({ storage });
-
- 
-
-
-
   // POST endpoint to handle file upload
   app.post('/upload', upload.fields([{ name: 'coverFile' }, { name: 'personalFile' }]), (req, res) => {
     try {
@@ -88,42 +80,13 @@ const storage = multer.diskStorage({
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+  //////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////////////////// upload projects files
-
- // Update multer configuration to accept multiple files
- const uploadM = multer({ storage }).fields([
-  { name: 'coverFile', maxCount: 1 }, // For single cover file
-  { name: 'imagesFiles', maxCount: 10 }, // For multiple image files (up to 10, adjust maxCount as needed)
-]);
-  
-  // POST endpoint to handle file upload
-  app.post('/uploadimages', (req, res) => {
+  // // POST endpoint to handle file upload
+  app.post('/uploadimage', upload.fields([{ name: 'coverFile', maxCount: 1 }]), (req, res) => {
     try {
       const uploadedCoverFile = req.files['coverFile'] ? req.files['coverFile'][0] : null;
-      const uploadedImagesFiles = req.files['imagesFile'] ? req.files['imagesFile'] : [];
       const oldCoverFile = req.body.oldCoverImg;
-      const oldImages = req.body.oldImages ? req.body.oldImages : [];
-  
       // Delete the old cover image if it exists
       if (oldCoverFile) {
         const oldCoverPath = './uploads/' + oldCoverFile;
@@ -135,31 +98,10 @@ const storage = multer.diskStorage({
           }
         });
       }
-  
-      // Delete the old images if they exist
-      for (const oldImage of oldImages) {
-        const oldImagePath = './uploads/' + oldImage;
-        fs.unlink(oldImagePath, (err) => {
-          if (err) {
-            console.error('Error deleting the file:', err);
-          } else {
-            console.log('Image File deleted successfully!');
-          }
-        });
-      }
-  
       // Handle the uploaded files as per your requirements
       // For example, you can store the file information in a database, etc.
       const filePathCover = uploadedCoverFile ? uploadedCoverFile.path : null;
       console.log('Cover File uploaded successfully:', filePathCover);
-  
-      for (const uploadedImageFile of uploadedImagesFiles) {
-        const imagePath = uploadedImageFile.path;
-        console.log('Image File uploaded successfully:', imagePath);
-        // Handle the image files as per your requirements
-        // For example, you can store the file information in a database, etc.
-      }
-  
       // Send a response to the client
       res.json({ fileName: uploadedCoverFile ? uploadedCoverFile.filename : null });
     } catch (error) {
@@ -167,12 +109,54 @@ const storage = multer.diskStorage({
       res.status(500).json({ error: 'Internal server error' });
     }
   });
-
-//res.json({ fileName: uploadedCoverFile ? uploadedCoverFile.filename : uploadedImagesFile.filename });
-
-
-
-
+////////     ////////    //////////
+//      //   //               //    
+//      //   //               //    
+////////     ////////         //    
+//           //               //    
+//           //               //    
+//           ////////         //    
+  app.post('/uploadimages', upload.array("imagesFile"), (req, res) => {
+    try {
+      // console.log(req.body);
+      // console.log(req.files);
+      // console.log(req.body.oldImages)
+      // if (Array.isArray(oldImages)) {
+      //   const filenames = oldImages.map((file) => {
+      //     return file.oldImages; // Assuming 'name' is the property that contains the filename
+      //   });
+      //   console.log(filenames);
+      // }
+      // Delete the old images if they exist
+      // oldImages.map((item) => {
+        // return item.filename
+        // console.log(item.filename);
+      // })
+      // for (const oldImage of oldImages) {
+      //   const oldImagePath = './uploads/' + oldImage;
+      //   fs.unlink(oldImagePath, (err) => {
+      //     if (err) {
+      //       console.error('Error deleting the file:', err);
+      //     } else {
+      //       console.log('Image File deleted successfully!');
+      //     }
+      //   });
+      // }
+      // Handle the uploaded files as per your requirements
+      // For example, you can store the file information in a database, etc.
+      // for (const uploadedImageFile of uploadedImagesFiles) {
+      //   const imagePath = uploadedImageFile.path;
+      //   console.log('Image File uploaded successfully:', imagePath);
+      //   // Handle the image files as per your requirements
+      //   // For example, you can store the file information in a database, etc.
+      // }
+      // Send a response to the client
+      res.json({ fileName: req.files});
+    } catch (error) {
+      console.error('Error uploading the file:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 
 //////////////////////////////////////////////////////////////////////////////////////////
                                           //////
@@ -436,8 +420,8 @@ app.put("/updateprojectdata/:id", (req, res) => {
       date: req.body.date,
       srcLink: req.body.srcLink,
       shownText: req.body.shownText,
-      coverImg: req.body.coverImg
-      // images: req.body.title,
+      coverImg: req.body.coverImg,
+      images: req.body.imagesFiles
   })
   .then((projectdata) => {
       res.json(projectdata)

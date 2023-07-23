@@ -30,18 +30,9 @@ const EditProjectsData = () => {
 // file upload function
 
 const [selectedCoverFile, setSelectedCoverFile] = useState(null);
-const [imagesFiles, setImagesFiles] = useState([]);
-
-
 const handleCoverFileChange = (event) => {
-  setSelectedCoverFile(event.target.files[0]);
+    setSelectedCoverFile(event.target.files[0]);
 };
-
-const handleImagesFileChange = (event) => {
-    const filesArray = Array.from(event.target.files); // Convert the FileList to an array
-    setImagesFiles(filesArray);
-  };
-
 const handleUpload = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -49,15 +40,7 @@ const handleUpload = (e) => {
       formData.append('coverFile', selectedCoverFile);
       formData.append('oldCoverImg', coverImg); // Send the filename of the old file
     }
-
-    if (imagesFiles.length > 0) {
-        for (let i = 0; i < imagesFiles.length; i++) {
-          formData.append(`imagesFile${i}`, imagesFiles[i]);
-        }
-        formData.append('oldImages', imagesFiles); // Assuming images state contains the filenames of the old images separated by '|||'
-      }
-  
-    fetch('http://localhost:3001/uploadimages', {
+    fetch('http://localhost:3001/uploadimage', {
       method: 'POST',
       body: formData,
     })
@@ -77,7 +60,51 @@ const handleUpload = (e) => {
         console.error('Error uploading the file:', error);
       });
   };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const [imagesFiles, setImagesFiles] = useState([]);
+const handleImagesFileChange = (event) => {
+    const filesArray = Array.from(event.target.files); // Convert the FileList to an array
+    setImagesFiles(filesArray);
+  };
+
+const handleUploads = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+       if (imagesFiles.length > 0) {
+        for (let i = 0; i < imagesFiles.length; i++) {
+          formData.append("imagesFile", imagesFiles[i]);
+        }
+        formData.append('oldImages', imagesFiles); // Assuming images state contains the filenames of the old images separated by '|||'
+      }
+      console.log(...formData);
+
+    fetch('http://localhost:3001/uploadimages', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok.');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if(imagesFiles){
+            setImagesFiles(data.fileName.map((item) => { return item.filename }))
+        }
+        console.log('File uploaded from front successfully:', data.fileName.map((item) => { return item.filename }));
+    })
+      .catch((error) => {
+        console.error('Error uploading the file:', error);
+      });
+  };
   
+
+
+
+
 // file upload function
 // file upload function
 // file upload function
@@ -86,10 +113,10 @@ const handleUpload = (e) => {
 
 
 
-
-
-console.log(imagesFiles);
-
+//  useEffect(() => {
+    // This will log the updated imagesFiles value whenever it changes
+    // console.log(imagesFiles[0]);
+//   }, [imagesFiles]);
 
 
 
@@ -186,7 +213,7 @@ console.log(imagesFiles);
                           <label className='text-dark'>Choose Personal image</label>
                           <input value={"The files now are: " + imagesFiles} type="text" className="form-control" disabled/>
                           <input multiple className='text-dark' type="file" onChange={handleImagesFileChange} />
-                          <button className='text-dark' onClick={handleUpload}>Upload</button>
+                          <button className='text-dark' onClick={handleUploads}>Upload</button>
                         </div>
 
 
