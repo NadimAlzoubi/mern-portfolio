@@ -2,16 +2,20 @@ const fs = require('fs')
 const exprees = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser');
+//const jwt = require('jsonwebtoken'); // استيراد مكتبة التوقيع والتحقق من JWT
 require('dotenv').config();
 const aboutInfoModel = require('./modules/aboutInfo')
 const skillsModel = require('./modules/skills')
 const resumeModel = require('./modules/resume')
 const projectsModel = require('./modules/projects')
+const loginModel = require('./modules/login')
 const app = exprees()
 app.use(cors())
 app.use(exprees.json())
+app.use(bodyParser.json());
 function connectWithRetry() {
-  mongoose.connect(`mongodb+srv://${process.env.REACT_APP_MONGOUSERNAME}:${process.env.REACT_APP_MONGOPASSWORD}@cluster.i7e5xzt.mongodb.net/crudapp`)
+  mongoose.connect(process.env.REACT_APP_MONGO_URI)
     .then(() => {
       console.log('Connecting to DB...');
     })
@@ -22,8 +26,28 @@ function connectWithRetry() {
     });
 }
 connectWithRetry();
+// login
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const user = await loginModel.findOne({ username });
+    if (!user) {
+      res.status(401).json({ message: 'Invalid credentials' });
+    } else {
+      if (user.password === password) {
+        res.json({ username: user.username });
+      } else {
+        res.status(401).json({ message: 'Invalid credentials' });
+      }
+    }
+  } catch (error) {
+    console.error('Failed to login:', error.message);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 const multer = require('multer')
-const path = require('path')
+const path = require('path');
+const { log } = require('util');
 // Define the storage for multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -47,7 +71,6 @@ const storage = multer.diskStorage({
       }
       // Handle the uploaded files as per your requirements
       // For example, you can store the file information in a database, etc.
-
       // Delete the old files if they exist
       const oldCoverFile = req.body.oldCoverImg;
       const oldPersonalFile = req.body.oldPersonalImg;
@@ -110,7 +133,6 @@ const storage = multer.diskStorage({
     }
   });
   //////////////////////////////////////////////////////////////////////////////////////
-
   // // POST endpoint to handle file upload
   app.post('/uploadimage', upload.fields([{ name: 'coverFile', maxCount: 1 }]), (req, res) => {
     try {
@@ -154,49 +176,8 @@ const storage = multer.diskStorage({
       res.status(500).json({ error: 'Internal server error' });
     }
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //login
-// app.get('/logindata', (req, res)=>{
-//   if (req.body.user == process.env.REACT_APP_USERNAME){
-//       res.json(req.body.user);
-//   }else{
-//       res.json({error: "err"})
-//   }
-// })
-
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
                                           //////
-                                          //////
-                                          //////
-                                          //////
-
 //about R
 app.get('/aboutData', (req, res)=>{
     aboutInfoModel.find({})
@@ -207,7 +188,6 @@ app.get('/aboutData', (req, res)=>{
         res.json(err)
     })
 })
-
 // about U
 app.put("/updatedata/:id", (req, res) => {
   const id = req.params.id;
@@ -237,16 +217,8 @@ app.put("/updatedata/:id", (req, res) => {
   })
 })
                                           //////
-                                          //////
-                                          //////
-                                          //////
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
-                                          //////
-                                          //////
-                                          //////
                                           //////
 // resume C
 app.put('/addresumedata', async (req, res) => {
@@ -279,7 +251,6 @@ app.put('/addresumedata', async (req, res) => {
     res.status(500).json({ message: 'Failed to insert data', error: error.message });
   }
 });
-
 // resume R
 app.get('/resumeData', (req, res)=>{
     resumeModel.find({})
@@ -290,7 +261,6 @@ app.get('/resumeData', (req, res)=>{
         res.json(err)
     })
 })
-
 // resume U
 app.put("/updateresumedata/:id", (req, res) => {
   const id = req.params.id;
@@ -311,12 +281,9 @@ app.put("/updateresumedata/:id", (req, res) => {
       res.json(err)
   })
 })
-
 // resume D
-
 app.delete('/deleteresumedata/:id', async (req, res) => {
   const resumeId = req.params.id;
-
   try {
     // Find the document by ID and delete it using the 'resumeModel'
     const deletedData = await resumeModel.findByIdAndDelete(resumeId);
@@ -328,15 +295,9 @@ app.delete('/deleteresumedata/:id', async (req, res) => {
     res.status(500).json({ message: 'Failed to delete data', error: error.message });
   }
 });
-
-                                          //////
-                                          //////
-                                          //////
                                           //////
 //////////////////////////////////////////////////////////////////////////////////////////
-
 // skills C
-
 app.put('/addskillsdata', async (req, res) => {
   const {
     category,
@@ -359,9 +320,6 @@ app.put('/addskillsdata', async (req, res) => {
     res.status(500).json({ message: 'Failed to insert data', error: error.message });
   }
 });
-
-
-
 // skills R
 app.get('/skillsData', (req, res)=>{
     skillsModel.find({})
@@ -372,8 +330,6 @@ app.get('/skillsData', (req, res)=>{
         res.json(err)
     })
 })
-
-
 // Skills U
 app.put("/updateskillsData/:id", (req, res) => {
   const id = req.params.id;
@@ -384,31 +340,31 @@ app.put("/updateskillsData/:id", (req, res) => {
       shownText: req.body.shownText
   })
   .then((skillsData) => {
-      res.json(SkillsData)
+      res.json(skillsData)
   })
   .catch((err) => {
       res.json(err)
   })
 })
-
-
 // skills D
-
-                                          //////
-                                          //////
-                                          //////
+app.delete('/deleteskillsdata/:id', async (req, res) => {
+  const skillId = req.params.id;
+  try {
+    // Find the document by ID and delete it
+    const deletedData = await skillsModel.findByIdAndDelete(skillId);
+    if (!deletedData) {
+      return res.status(404).json({ message: 'Data not found' });
+    }
+    res.status(200).json({ message: 'Data deleted successfully', data: deletedData });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to delete data', error: error.message });
+  }
+});
                                           //////
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
-                                          //////
-                                          //////
-                                          //////
                                           //////
   // projects C
-
   app.put('/addprojectdata', async (req, res) => {
     const {
       title,
@@ -439,8 +395,6 @@ app.put("/updateskillsData/:id", (req, res) => {
       res.status(500).json({ message: 'Failed to insert data', error: error.message });
     }
   });
-                                          
-
 // projects R
 app.get('/projectsData', (req, res)=>{
     projectsModel.find({})
@@ -451,9 +405,6 @@ app.get('/projectsData', (req, res)=>{
         res.json(err)
     })
 })
-
-
-
 // project U
 app.put("/updateprojectdata/:id", (req, res) => {
   const id = req.params.id;
@@ -474,13 +425,9 @@ app.put("/updateprojectdata/:id", (req, res) => {
       res.json(err)
   })
 })
-
-
-
-
+// project D
 app.delete('/deleteprojectsdata/:id', async (req, res) => {
   const projectId = req.params.id;
-
   try {
     // Find the document by ID and delete it using the 'resumeModel'
     const deletedData = await projectsModel.findByIdAndDelete(projectId);
@@ -492,14 +439,8 @@ app.delete('/deleteprojectsdata/:id', async (req, res) => {
     res.status(500).json({ message: 'Failed to delete data', error: error.message });
   }
 });
-
-                                          //////
-                                          //////
-                                          //////
                                           //////
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
 const PORT = 3001
 app.listen(3001, ()=>{
     console.log("server in running on port: " + PORT);
