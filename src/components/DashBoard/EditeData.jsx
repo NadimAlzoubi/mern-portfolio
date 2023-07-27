@@ -8,9 +8,9 @@ const EditDash = () => {
   const [lastName, setLastName] = useState('');
   const [jobTitle, setJobTitle] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('')
+  const [cvLink, setCvLink] = useState('')
   const [aboutMe, setAboutMe] = useState('')
   const [footerAbout, setFooterAbout] = useState('')
-  const [cvLink, setCvLink] = useState('')
   const [address, setAddress] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
@@ -22,13 +22,19 @@ const EditDash = () => {
   const [personalImg, setPersonalImg] = useState('')
   const [coverImg, setCoverImg] = useState('')
   const navigate = useNavigate();
+  
+  // file upload function
+  // file upload function
+  // file upload function
+  
+  const [selectedCoverFile, setSelectedCoverFile] = useState(null);
+  const [selectedPersonalFile, setSelectedPersonalFile] = useState(null);
+  const [selectedCvFile, setSelectedCvFile] = useState(null);
+  
+const handleCvFileChange = (event) => {
+  setSelectedCvFile(event.target.files[0])
+}
 
-// file upload function
-// file upload function
-// file upload function
-
-const [selectedCoverFile, setSelectedCoverFile] = useState(null);
-const [selectedPersonalFile, setSelectedPersonalFile] = useState(null);
 const handleCoverFileChange = (event) => {
   setSelectedCoverFile(event.target.files[0]);
 };
@@ -47,6 +53,10 @@ const handleUpload = (e) => {
       formData.append('personalFile', selectedPersonalFile);
       formData.append('oldPersonalImg', personalImg);
     }
+    if(selectedCvFile){
+      formData.append('cvFile', selectedCvFile);
+      formData.append('oldCvFile', cvLink);
+    }
 
     fetch('http://localhost:3001/upload', {
       method: 'POST',
@@ -60,12 +70,21 @@ const handleUpload = (e) => {
       })
       .then((data) => {
         if (selectedCoverFile) {
-          setCoverImg(data.fileName);
+          setCoverImg(data.coverFileName);
+        console.log('File uploaded from front successfully:', data.coverFileName);
+
         }
         if (selectedPersonalFile) {
-          setPersonalImg(data.fileName);
+          setPersonalImg(data.personalFileName);
+        console.log('File uploaded from front successfully:', data.personalFileName);
+
         }
-        console.log('File uploaded from front successfully:', data.fileName);
+        if (selectedCvFile) {
+          setCvLink(data.cvFileName);
+        console.log('File uploaded from front successfully:', data.cvFileName);
+
+        }
+        // console.log('File uploaded from front successfully:', data.fileName);
       })
       .catch((error) => {
         console.error('Error uploading the file:', error);
@@ -170,11 +189,6 @@ const handleUpload = (e) => {
                         </div>
                       
                         <div className="mb-2">
-                            <label className='text-dark'>CV file</label>
-                            <input onChange={(e)=>{setCvLink(e.target.value)}} value={cvLink} type="text" className="form-control" />
-                        </div>
-                      
-                        <div className="mb-2">
                             <label className='text-dark'>Address</label>
                             <input onChange={(e)=>{setAddress(e.target.value)}} value={address} type="text" className="form-control" />
                         </div>
@@ -214,7 +228,19 @@ const handleUpload = (e) => {
                             <input onChange={(e)=>{setTelegram(e.target.value)}} value={telegram} type="text" className="form-control" />
                         </div>
 
+                        {/* <div className="mb-2">
+                            <label className='text-dark'>CV file</label>
+                            <input onChange={(e)=>{setCvLink(e.target.value)}} value={cvLink} type="text" className="form-control" />
+                        </div> */}
                         <br />
+                        <div className="mb-2">
+                          <label className='text-dark'>Choose CV File</label>
+                          <input value={"The file now is: " + cvLink} type="text" className="form-control" disabled/>
+                          <input className='text-dark' type="file" onChange={handleCvFileChange} />
+                          <button className='text-dark' onClick={handleUpload}>Upload</button>
+                        </div>
+                        <br />
+
                         <div className="mb-2">
                           <label className='text-dark'>Choose Nice/Cover image</label>
                           <input value={"The file now is: " + coverImg} type="text" className="form-control" disabled/>

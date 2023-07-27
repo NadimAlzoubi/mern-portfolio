@@ -74,10 +74,6 @@ const Dash = () => {
                 <td>Footer resume</td>
                 <td>{record.footerAbout}</td>
               </tr>
-              <tr key={index + 4}>
-                <td>CV Link</td>
-                <td>{record.cvLink}</td>
-              </tr>
               <tr key={index + 5}>
                 <td>Address</td>
                 <td>{record.address}</td>
@@ -109,6 +105,10 @@ const Dash = () => {
               <tr key={index + 12}>
                 <td>Telegram link</td>
                 <td>{record.telegram}</td>
+              </tr>
+              <tr key={index + 4}>
+                <td>CV File</td>
+                <td>{record.cvLink}</td>
               </tr>
               <tr key={index + 14}>
                 <td>Nice/Cover image</td>

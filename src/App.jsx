@@ -35,7 +35,6 @@ function App() {
           <Route path='/projects' element={<Projects/>}></Route>
           <Route path='/ProjectDetails' element={<ProjectDetails/>}></Route>
           <Route path='/contact' element={<Contact/>}></Route>
-          
           <Route path='/dash' element={<Dash/>}></Route>
           <Route path='/updatedata/:id' element={<EditDash/>}></Route>
           <Route path='/resumedash' element={<ResumeData/>}></Route>

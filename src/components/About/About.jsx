@@ -61,11 +61,11 @@ function About() {
                   </li>
                 </ul>
               </div>
-              <a href={info.cvLink} className="btn btn1" style={{ color: '#111' }} download>
+              <a href={"/server/uploads/" + info.cvLink} className="btn btn1" style={{ color: '#111' }} download>
                 download cv
               </a>
               <span style={{ margin: '0 1.5rem' }}> OR </span>
-              <a href={info.cvLink} className="btn btn1" style={{ color: '#111' }}>
+              <a href={"/server/uploads/" + info.cvLink} target='_blank' className="btn btn1" style={{ color: '#111' }}>
                 view cv
               </a>
             </div>

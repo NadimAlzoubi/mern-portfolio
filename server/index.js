@@ -2,6 +2,7 @@ const fs = require('fs')
 const exprees = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
+require('dotenv').config();
 const aboutInfoModel = require('./modules/aboutInfo')
 const skillsModel = require('./modules/skills')
 const resumeModel = require('./modules/resume')
@@ -10,7 +11,7 @@ const app = exprees()
 app.use(cors())
 app.use(exprees.json())
 function connectWithRetry() {
-  mongoose.connect('mongodb+srv://nadim99:00962@cluster.i7e5xzt.mongodb.net/crudapp')
+  mongoose.connect(`mongodb+srv://${process.env.REACT_APP_MONGOUSERNAME}:${process.env.REACT_APP_MONGOPASSWORD}@cluster.i7e5xzt.mongodb.net/crudapp`)
     .then(() => {
       console.log('Connecting to DB...');
     })
@@ -36,11 +37,12 @@ const storage = multer.diskStorage({
   });
   const upload = multer({ storage });
   // POST endpoint to handle file upload
-  app.post('/upload', upload.fields([{ name: 'coverFile' }, { name: 'personalFile' }]), (req, res) => {
+  app.post('/upload', upload.fields([{ name: 'coverFile' }, { name: 'personalFile' }, { name: 'cvFile' }]), (req, res) => {
     try {
       const uploadedCoverFile = req.files['coverFile'] ? req.files['coverFile'][0] : null;
       const uploadedPersonalFile = req.files['personalFile'] ? req.files['personalFile'][0] : null;
-      if (!uploadedCoverFile && !uploadedPersonalFile) {
+      const uploadedCvFile = req.files['cvFile'] ? req.files['cvFile'][0] : null;
+      if (!uploadedCoverFile && !uploadedPersonalFile && !uploadedCvFile) {
         return res.status(400).json({ error: 'No file uploaded' });
       }
       // Handle the uploaded files as per your requirements
@@ -49,8 +51,10 @@ const storage = multer.diskStorage({
       // Delete the old files if they exist
       const oldCoverFile = req.body.oldCoverImg;
       const oldPersonalFile = req.body.oldPersonalImg;
+      const oldCvFile = req.body.oldCvFile;
       const oldCoverPath = "./uploads/" + oldCoverFile;
       const oldPersonalPath = "./uploads/" + oldPersonalFile;
+      const oldCvPath = "./uploads/" + oldCvFile;
       if (oldCoverFile) {
         fs.unlink(oldCoverPath, (err) => {
           if (err) {
@@ -69,12 +73,37 @@ const storage = multer.diskStorage({
           }
         });
       }
+      if (oldCvFile) {
+        fs.unlink(oldCvPath, (err) => {
+          if (err) {
+            console.error('Error deleting the file:', err);
+          } else {
+            console.log('Cv File deleted successfully!');
+          }
+        });
+      }
       const filePathCover = uploadedCoverFile ? uploadedCoverFile.path : null;
       const filePathPersonal = uploadedPersonalFile ? uploadedPersonalFile.path : null;
+      const filePathCv = uploadedCvFile ? uploadedCvFile.path : null;
       console.log('Cover File uploaded successfully:', filePathCover);
       console.log('Personal File uploaded successfully:', filePathPersonal);
+      console.log('Cv File uploaded successfully:', filePathCv);
       // Send a response to the client
-      res.json({ fileName: uploadedCoverFile ? uploadedCoverFile.filename : uploadedPersonalFile.filename });
+      if(uploadedCoverFile){
+        res.json({ 
+          coverFileName: uploadedCoverFile.filename
+        });
+      } 
+      if(uploadedPersonalFile){
+        res.json({ 
+          personalFileName: uploadedPersonalFile.filename
+        });
+      } 
+      if(uploadedCvFile){
+        res.json({ 
+          cvFileName: uploadedCvFile.filename
+        });
+      } 
     } catch (error) {
       console.error('Error uploading the file:', error);
       res.status(500).json({ error: 'Internal server error' });
@@ -118,38 +147,6 @@ const storage = multer.diskStorage({
 //           ////////         //    
   app.post('/uploadimages', upload.array("imagesFile"), (req, res) => {
     try {
-      // console.log(req.body);
-      // console.log(req.files);
-      // console.log(req.body.oldImages)
-      // if (Array.isArray(oldImages)) {
-      //   const filenames = oldImages.map((file) => {
-      //     return file.oldImages; // Assuming 'name' is the property that contains the filename
-      //   });
-      //   console.log(filenames);
-      // }
-      // Delete the old images if they exist
-      // oldImages.map((item) => {
-        // return item.filename
-        // console.log(item.filename);
-      // })
-      // for (const oldImage of oldImages) {
-      //   const oldImagePath = './uploads/' + oldImage;
-      //   fs.unlink(oldImagePath, (err) => {
-      //     if (err) {
-      //       console.error('Error deleting the file:', err);
-      //     } else {
-      //       console.log('Image File deleted successfully!');
-      //     }
-      //   });
-      // }
-      // Handle the uploaded files as per your requirements
-      // For example, you can store the file information in a database, etc.
-      // for (const uploadedImageFile of uploadedImagesFiles) {
-      //   const imagePath = uploadedImageFile.path;
-      //   console.log('Image File uploaded successfully:', imagePath);
-      //   // Handle the image files as per your requirements
-      //   // For example, you can store the file information in a database, etc.
-      // }
       // Send a response to the client
       res.json({ fileName: req.files});
     } catch (error) {
@@ -157,6 +154,42 @@ const storage = multer.diskStorage({
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //login
+// app.get('/logindata', (req, res)=>{
+//   if (req.body.user == process.env.REACT_APP_USERNAME){
+//       res.json(req.body.user);
+//   }else{
+//       res.json({error: "err"})
+//   }
+// })
+
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
                                           //////
@@ -361,21 +394,6 @@ app.put("/updateskillsData/:id", (req, res) => {
 
 // skills D
 
-app.delete('/deleteskillsdata/:id', async (req, res) => {
-  const resumeId = req.params.id;
-
-  try {
-    // Find the document by ID and delete it using the 'resumeModel'
-    const deletedData = await skillsModel.findByIdAndDelete(resumeId);
-    if (!deletedData) {
-      return res.status(404).json({ message: 'Data not found' });
-    }
-    res.status(200).json({ message: 'Data deleted successfully', data: deletedData });
-  } catch (error) {
-    res.status(500).json({ message: 'Failed to delete data', error: error.message });
-  }
-});
-
                                           //////
                                           //////
                                           //////
@@ -456,64 +474,30 @@ app.put("/updateprojectdata/:id", (req, res) => {
       res.json(err)
   })
 })
+
+
+
+
+app.delete('/deleteprojectsdata/:id', async (req, res) => {
+  const projectId = req.params.id;
+
+  try {
+    // Find the document by ID and delete it using the 'resumeModel'
+    const deletedData = await projectsModel.findByIdAndDelete(projectId);
+    if (!deletedData) {
+      return res.status(404).json({ message: 'Data not found' });
+    }
+    res.status(200).json({ message: 'Data deleted successfully', data: deletedData });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to delete data', error: error.message });
+  }
+});
+
                                           //////
                                           //////
                                           //////
                                           //////
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// app.get('/getUser/:id', (req, res) => {
-//     const id = req.params.id;
-//     UserModel.findById({_id:id})
-//     .then((users) => {
-//         res.json(users)
-//     })
-//     .catch((err) => {
-//         res.json(err)
-//     })
-// })
-// app.post("/createUser", (req, res) => {
-//     UserModel.create(req.body)
-//     .then((users)=>{
-//         res.json(users)
-//     })
-//     .catch((err)=>{
-//         res.json(err) 
-//     })
-// })
-
-
-
-
-// app.delete("/deleteUser/:id", (req, res) => {
-//     const id = req.params.id;
-//     UserModel.findByIdAndDelete({_id:id})
-//     .then((res) => {
-//         res.json(res)
-//     })
-//     .catch((err) => {
-//         res.json(err)
-//     })
-// })
-
-
-
-
-
 
 
 const PORT = 3001
