@@ -41,19 +41,21 @@ return (
       <p className="text">{projects.map.length > 0 ? '' : 'There are no projects currently.'}</p>
     </section>
     <div className="parent" id="parentDiv">
-      {
-        projects.map((project) => (
-          <React.Fragment key={project._id}>
-          <div>
-            <div className="proForm">
-              <img className='proimgasp' src={"/server/uploads/" + project.coverImg} alt="Project Cover Img" />
-              <Link to={'/projectDetails?projectId=' + btoa(project._id)} className="btnmo">View</Link>
-            </div>
-            <p className="proTitle">{project.title}</p>
-          </div>
-          </React.Fragment>
-          ))
-      }
+    {projects.length > 0 ? (
+  projects.map((project) => (
+    <React.Fragment key={project._id}>
+      <div>
+        <div className="proForm">
+          <img className='proimgasp' src={"/server/uploads/" + project.coverImg} alt="Project Cover Img" />
+          <Link to={'/projectDetails?projectId=' + btoa(project._id)} className="btnmo">View</Link>
+        </div>
+        <p className="proTitle">{project.title}</p>
+      </div>
+    </React.Fragment>
+  ))
+) : (
+  <center>No Projects</center>
+)}
     </div>
   <Footer />
 

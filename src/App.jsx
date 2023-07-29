@@ -24,6 +24,7 @@ import ProjectsData from './components/DashBoard/ProjectsData';
 import AddProjectsData from './components/DashBoard/AddProjectsData';
 import EditProjectsData from './components/DashBoard/EditProjectsData';
 import Login from './components/Login/Login';
+import FilePreview from './components/Fs/Fs';
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -43,6 +44,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
 
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          
+          <Route path="/filepre" element={loggedInUser ? <FilePreview /> : <Error />} />
           
           <Route path="/dash" element={loggedInUser ? <Dash /> : <Navigate to="/login" />} />
           <Route path="/updatedata/:id" element={loggedInUser ? <EditDash /> : <Error />} />

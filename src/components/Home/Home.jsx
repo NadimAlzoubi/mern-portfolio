@@ -8,7 +8,7 @@ function Home() {
   
   const [aboutInfo, setAboutInfo] = useState([])
     useEffect(()=>{
-        axios.get('http://localhost:3001/aboutData')
+        axios.get(`http://localhost:3001/aboutData`)
         .then((result)=>{
           setAboutInfo(result.data);
         })

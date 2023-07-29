@@ -13,6 +13,17 @@ function Header() {
             console.log(err);
         })
     }, [])
+    const [projects, setProjects] = useState([])
+    useEffect(()=>{
+        axios.get('http://localhost:3001/projectsData')
+        .then((result)=>{
+          setProjects(result.data);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+      }, [])
+
   return (
     <>  
     <nav className="navbar navbar-expand-lg bg-dark">
@@ -42,9 +53,13 @@ function Header() {
         <li className="nav-item">
           <Link to="/skills" className="nav-link">skills</Link>
         </li>
-        <li className="nav-item">
-          <Link to="/projects" className="nav-link">projects</Link>
-        </li>
+        {
+          projects.length > 0 ? (
+              <li className="nav-item">
+                <Link to="/projects" className="nav-link">projects</Link>
+              </li>
+          ) : (null)
+        }
         <li className="nav-item">
           <Link to="/contact" className="nav-link">contact</Link>
         </li>

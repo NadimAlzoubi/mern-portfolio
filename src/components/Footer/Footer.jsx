@@ -16,6 +16,17 @@ function Footer() {
       });
   }, []);
 
+  const [projects, setProjects] = useState([])
+  useEffect(()=>{
+      axios.get('http://localhost:3001/projectsData')
+      .then((result)=>{
+        setProjects(result.data);
+      })
+      .catch((err)=>{
+          console.log(err);
+      })
+    }, [])
+
   return (
     <footer className="footer container">
       {aboutInfo.map((info) => (
@@ -32,7 +43,11 @@ function Footer() {
                 <Link to="/about" className="text">about ↗</Link>
                 <Link to="/resume" className="text">resume ↗</Link>
                 <Link to="/skills" className="text">skills ↗</Link>
-                <Link to="/projects" className="text">projects ↗</Link>
+                {
+                  projects.length > 0 ? (
+                    <Link to="/projects" className="text">projects ↗</Link>
+                  ) : (null)
+                }
                 <Link to="/contact" className="text">contact ↗</Link>
             </div>
           </div>

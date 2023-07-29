@@ -1,9 +1,10 @@
-const fs = require('fs')
-const exprees = require('express')
-const cors = require('cors')
-const mongoose = require('mongoose')
+const fs = require('fs-extra');
+const multer = require('multer');
+const path = require('path');
+const exprees = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-//const jwt = require('jsonwebtoken'); // استيراد مكتبة التوقيع والتحقق من JWT
 require('dotenv').config();
 const aboutInfoModel = require('./modules/aboutInfo')
 const skillsModel = require('./modules/skills')
@@ -26,6 +27,58 @@ function connectWithRetry() {
     });
 }
 connectWithRetry();
+
+const fsUpload = multer({ dest: 'uploads/' });
+
+
+// API endpoint to get the list of files in a folder
+app.get('/fsfiles', async (req, res) => {
+  try {
+    const files = await fs.readdir('uploads');
+    const fileDetails = await Promise.all(
+      files.map(async (file) => {
+        const stats = await fs.stat(path.join('uploads', file));
+        return {
+          name: file,
+          size: stats.size,
+        };
+      })
+    );
+    res.json(fileDetails);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to read files.' });
+  }
+});
+
+// API endpoint to delete a file
+app.delete('/fsfiles/:filename', async (req, res) => {
+  const { filename } = req.params;
+  try {
+    await fs.promises.unlink(path.join('uploads', filename));
+    res.json({ message: 'File deleted successfully.' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to delete the file.' });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // login
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
@@ -45,8 +98,6 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
-const multer = require('multer')
-const path = require('path');
 const { log } = require('util');
 // Define the storage for multer
 const storage = multer.diskStorage({
@@ -441,7 +492,7 @@ app.delete('/deleteprojectsdata/:id', async (req, res) => {
 });
                                           //////
 //////////////////////////////////////////////////////////////////////////////////////////
-const PORT = 3001
-app.listen(3001, ()=>{
+const PORT = process.env.REACT_APP_PORT
+app.listen(process.env.REACT_APP_PORT, ()=>{
     console.log("server in running on port: " + PORT);
 })
