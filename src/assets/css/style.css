@@ -610,55 +610,6 @@ label{
     width: 100%;
     position: relative;
 }
-.projects .row .item:nth-child(1){
-    background: url(../assets/27.png) center/cover no-repeat;
-    background-size: contain;
-}
-.projects .row .item:nth-child(2){
-    background: url(../assets/26.png) center/cover no-repeat;
-    background-size: contain;
-}
-.projects .row .item:nth-child(3){
-    background: url(../assets/28.png) center/cover no-repeat;
-    background-size: contain;
-}
-.projects .row .item:nth-child(4){
-    background: url(../assets/29.png) center/cover no-repeat;
-    background-size: contain;
-}
-.projects .row .item:nth-child(5){
-    background: url(../assets/25.png) center/cover no-repeat;
-    background-size: contain;
-}
-.projects .row .item:nth-child(6){
-    background: url(../assets/24.png) center/cover no-repeat;
-    background-size: contain;
-}
-.projects .row .item:nth-child(7){
-    background: url(../assets/23.png) center/cover no-repeat;
-    background-size: contain;
-}
-.projects .row .item:nth-child(8){
-    background: url(../assets/22.png) center/cover no-repeat;
-    background-size: contain;
-}
-.projects .row .item:nth-child(9){
-    background: url(../assets/21.png) center/cover no-repeat;
-    background-size: contain;
-}
-.projects .row .item:nth-child(10){
-    background: url(../assets/20.png) center/cover no-repeat;
-    background-size: contain;
-}
-.projects .row .item:nth-child(11){
-    background: url(../assets/30.jpg) center/cover no-repeat;
-    background-size: contain;
-}
-.projects .row .item:nth-child(12){
-    background: url(../assets/31.jpg) center/cover no-repeat;
-    background-size: contain;
-}
-
 
 .projects .row .item{
     background-size: contain;
@@ -1104,19 +1055,7 @@ label{
     .projects .row .item{
         margin: 0;
     }
-    /* .projects .row .item:nth-child(1){
-        grid-column: 9/16;
-    }
-    .projects .row .item:nth-child(2){
-        grid-column: 2;
-    }
-    .projects .row .item:nth-child(3){
-        grid-column: 1/3;
-    }
-    .projects .row .item:nth-child(6){
-        grid-column: 2/4;
-    } */
-
+ 
     /* blog page */
     .blog .row{
         display: grid;
@@ -1152,6 +1091,7 @@ label{
     .navbar-collapse{
         height: 100%;
         flex: 1 0 auto;
+        justify-content: end !important;
     }
     .brand-and-toggler{
         flex: 0 0 100px;
@@ -1162,6 +1102,7 @@ label{
     .nav-link{
         font-size: 1rem;
     }
+
 
     /* home page */
     .home .row{

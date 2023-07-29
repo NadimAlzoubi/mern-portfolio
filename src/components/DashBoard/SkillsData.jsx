@@ -54,6 +54,9 @@ const SkillsData = () => {
       <Link to={'/projectsdash'} style={{marginRight: '1.5rem', borderRadius: '4px', padding: '10px'}} className="mb-4 btn bg-primary text-white" variant="primary">
         Projects Data
       </Link>
+      <Link to={'/filepre'} style={{marginRight: '1.5rem', borderRadius: '4px', padding: '10px'}} className="mb-4 btn bg-primary text-white" variant="primary">
+        Fs
+      </Link>
       <br />
       <Link to={'/addskillsdash'} style={{marginRight: '1.5rem', borderRadius: '4px', padding: '10px'}} className="mb-4 btn bg-success text-white" variant="primary">
         Add +

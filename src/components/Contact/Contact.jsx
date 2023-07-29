@@ -34,7 +34,7 @@ function Contact() {
       {aboutInfo.map((info) => (
       <React.Fragment key={info._id}>
 
-        <p className="text">You can contact me anywhere, anytime.</p>
+        {/* <p className="text">You can contact me anywhere, anytime.</p> */}
 
       <div className="row">
         <div className="col-left">

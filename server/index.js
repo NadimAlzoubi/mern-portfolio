@@ -69,7 +69,11 @@ app.delete('/fsfiles/:filename', async (req, res) => {
 
 
 
-
+// Route to serve index.html
+app.get('/', (req, res) => {
+  const titleData = 'Your Page Title'; // This can be dynamic data fetched from the database or any other source
+  res.render('index', { title: titleData });
+});
 
 
 

@@ -25,7 +25,7 @@ import AddProjectsData from './components/DashBoard/AddProjectsData';
 import EditProjectsData from './components/DashBoard/EditProjectsData';
 import Login from './components/Login/Login';
 import FilePreview from './components/Fs/Fs';
-
+import Tit from './components/Tit/Tit';
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
 
@@ -33,6 +33,8 @@ function App() {
     setLoggedInUser(user);
   };
   return (
+      <React.Fragment>
+        <Tit />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
@@ -60,6 +62,7 @@ function App() {
           <Route path="/updateprojectdata/:id" element={loggedInUser ? <EditProjectsData /> : <Error />} />
           <Route path="*" element={<Error />} />
         </Routes>
+      </React.Fragment>
   );
 }
 
