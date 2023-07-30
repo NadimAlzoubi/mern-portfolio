@@ -147,18 +147,10 @@ const handleUploads = (e) => {
                         <br />
                         <div className="mb-2">
                           <label className='text-dark'>Choose Cover image</label>
-                          {/* <input value={"The file now is: " + coverImg} type="text" className="form-control" disabled/> */}
+                          <input value={"The file now is: " + coverImg} type="text" className="form-control" disabled/>
                           <input className='text-dark' type="file" onChange={handleCoverFileChange} />
                           <button className='text-dark' onClick={handleUpload}>Upload</button>
                         </div>
-
-                        {/* <br />
-                        <div className="mb-2">
-                          <label className='text-dark'>Choose Personal image</label>
-                          <input value={"The files now are: " + imagesFiles} type="text" className="form-control" disabled/>
-                          <input multiple className='text-dark' type="file" onChange={handleImagesFileChange} />
-                          <button className='text-dark' onClick={handleUploads}>Upload</button>
-                        </div> */}
                         <button type='submit' className="btn btn-success mr-2">Save</button>
                         <button className="btn btn-primary" onClick={() => navigate('/projectsdash')}>Cancel</button>
                     </form>    

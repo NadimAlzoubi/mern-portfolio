@@ -1,6 +1,7 @@
 // client/src/FilePreview.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const FilePreview = () => {
   const [files, setFiles] = useState([]);
@@ -37,6 +38,25 @@ const FilePreview = () => {
 
   return (
     <div className="container mt-4">
+      <Link to={'/home'} style={{marginRight: '1.5rem', borderRadius: '4px', padding: '10px'}} className="mb-4 btn bg-primary text-white" variant="primary">
+        Exit ⨉
+      </Link>
+      <Link to={'/dash'} style={{marginRight: '1.5rem', borderRadius: '4px', padding: '10px'}} className="mb-4 btn bg-primary text-white" variant="primary">
+        About Data
+      </Link>
+      <Link to={'/resumedash'} style={{marginRight: '1.5rem', borderRadius: '4px', padding: '10px'}} className="mb-4 btn bg-primary text-white" variant="primary">
+        Resume Data
+      </Link>
+      <Link to={'/skillsdash'} style={{marginRight: '1.5rem', borderRadius: '4px', padding: '10px'}} className="mb-4 btn bg-primary text-white" variant="primary">
+        Skills Data
+      </Link>
+      <Link to={'/projectsdash'} style={{marginRight: '1.5rem', borderRadius: '4px', padding: '10px'}} className="mb-4 btn bg-primary text-white" variant="primary">
+        Projects Data
+      </Link>
+      <Link to={'/filepre'} style={{marginRight: '1.5rem', borderRadius: '4px', padding: '10px'}} className="mb-4 btn bg-primary text-white" variant="primary">
+        Fs
+      </Link>
+
       <h1 className="mb-4">File Preview and Management</h1>
       <h2 className="mb-3">Total Size: {getTotalSize()} MB</h2>
       <ul className="list-group">
