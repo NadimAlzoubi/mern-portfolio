@@ -8,7 +8,7 @@ function Resume() {
   const [resume, setResume] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/resumeData')
+    axios.get('https://nadim.onrender.com/resumeData')
       .then((result) => {
         setResume(result.data);
       })

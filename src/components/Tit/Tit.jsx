@@ -3,7 +3,7 @@ import axios from 'axios'
 function Tit() {
     const [aboutInfo, setAboutInfo] = useState([])
     useEffect(()=>{
-        axios.get(`http://localhost:3001/aboutData`)
+        axios.get(`https://nadim.onrender.com/aboutData`)
         .then((result)=>{
           setAboutInfo(result.data);
         })

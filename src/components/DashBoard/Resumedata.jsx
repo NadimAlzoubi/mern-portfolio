@@ -10,7 +10,7 @@ const ResumeData = () => {
   const [resumeData, setResumeData] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get('http://localhost:3001/resumeData')
+    axios.get('https://nadim.onrender.com/resumeData')
       .then((result) => {
         setResumeData(result.data);
       })
@@ -20,7 +20,7 @@ const ResumeData = () => {
   }, []);
 
   const Delete = (resumeId) => {
-    axios.delete(`http://localhost:3001/deleteresumedata/${resumeId}`)
+    axios.delete(`https://nadim.onrender.com/deleteresumedata/${resumeId}`)
       .then((result) => {
         console.log(result);
         alert("Deleted successfully!");

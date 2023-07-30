@@ -58,7 +58,7 @@ const handleUpload = (e) => {
       formData.append('oldCvFile', cvLink);
     }
 
-    fetch('http://localhost:3001/upload', {
+    fetch('https://nadim.onrender.com/upload', {
       method: 'POST',
       body: formData,
     })
@@ -95,7 +95,7 @@ const handleUpload = (e) => {
 // file upload function
 
     useEffect(() => {
-      axios.get("http://localhost:3001/aboutData/")
+      axios.get("https://nadim.onrender.com/aboutData/")
         .then((result) => {
           const data = result.data;
           const record = data.find(item => item._id === id);
@@ -126,7 +126,7 @@ const handleUpload = (e) => {
 
   const Update = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3001/updatedata/${id}`, {
+    axios.put(`https://nadim.onrender.com/updatedata/${id}`, {
       firstName,
       lastName,
       jobTitle,

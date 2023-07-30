@@ -11,7 +11,7 @@ const EditSkillsData = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-      axios.get("http://localhost:3001/skillsdata")
+      axios.get("https://nadim.onrender.com/skillsdata")
         .then((result) => {
           const data = result.data;
           const record = data.find(item => item._id === id);
@@ -29,7 +29,7 @@ const EditSkillsData = () => {
 
   const Update = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3001/updateskillsdata/${id}`, {
+    axios.put(`https://nadim.onrender.com/updateskillsdata/${id}`, {
         category,
         name,
         per,

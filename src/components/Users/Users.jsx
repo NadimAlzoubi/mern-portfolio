@@ -5,7 +5,7 @@ import axios from "axios";
 function Users(){
     const [users, setUsers] = useState([])
     useEffect(()=>{
-        axios.get('http://localhost:3001/')
+        axios.get('https://nadim.onrender.com/')
         .then((result)=>{
             setUsers(result.data);
         })
@@ -16,7 +16,7 @@ function Users(){
 
     const handleDelete = (id) => {
         window.location.reload();
-        axios.delete('http://localhost:3001/deleteUser/' + id)
+        axios.delete('https://nadim.onrender.com/deleteUser/' + id)
         .then((res) => {
             console.log(res);
         })

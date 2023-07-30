@@ -27,7 +27,7 @@ const handleUpload = (e) => {
       formData.append('coverFile', selectedCoverFile);
       formData.append('oldCoverImg', coverImg); // Send the filename of the old file
     }
-    fetch('http://localhost:3001/uploadimage', {
+    fetch('https://nadim.onrender.com/uploadimage', {
       method: 'POST',
       body: formData,
     })
@@ -66,7 +66,7 @@ const handleUploads = (e) => {
       }
       console.log(...formData);
 
-    fetch('http://localhost:3001/uploadimages', {
+    fetch('https://nadim.onrender.com/uploadimages', {
       method: 'POST',
       body: formData,
     })
@@ -92,7 +92,7 @@ const handleUploads = (e) => {
 
   const Insert = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3001/addprojectdata`, {
+    axios.put(`https://nadim.onrender.com/addprojectdata`, {
         title,
         summry,
         description,

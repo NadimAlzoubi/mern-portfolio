@@ -15,7 +15,7 @@ const EditResumeData = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-      axios.get("http://localhost:3001/resumedata")
+      axios.get("https://nadim.onrender.com/resumedata")
         .then((result) => {
           const data = result.data;
           const record = data.find(item => item._id === id);
@@ -37,7 +37,7 @@ const EditResumeData = () => {
 
   const Update = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3001/updateresumedata/${id}`, {
+    axios.put(`https://nadim.onrender.com/updateresumedata/${id}`, {
         category,
         title,
         description,

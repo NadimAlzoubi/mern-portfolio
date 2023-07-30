@@ -10,7 +10,7 @@ const SkillsData = () => {
   const [skillsData, setSkillsData] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get('http://localhost:3001/skillsdata')
+    axios.get('https://nadim.onrender.com/skillsdata')
       .then((result) => {
         setSkillsData(result.data);
       })
@@ -21,7 +21,7 @@ const SkillsData = () => {
 
 
   const Delete = (resumeId) => {
-    axios.delete(`http://localhost:3001/deleteskillsdata/${resumeId}`)
+    axios.delete(`https://nadim.onrender.com/deleteskillsdata/${resumeId}`)
       .then((result) => {
         console.log(result);
         alert("Deleted successfully!");

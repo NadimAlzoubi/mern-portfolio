@@ -12,7 +12,7 @@ const AddSkillsData = () => {
 
   const Insert = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3001/addskillsdata`, {
+    axios.put(`https://nadim.onrender.com/addskillsdata`, {
         category,
         name,
         per,

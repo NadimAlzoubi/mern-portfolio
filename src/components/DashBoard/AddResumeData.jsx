@@ -18,7 +18,7 @@ const AddResumeData = () => {
 
   const Insert = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3001/addresumedata`, {
+    axios.put(`https://nadim.onrender.com/addresumedata`, {
         category,
         title,
         description,

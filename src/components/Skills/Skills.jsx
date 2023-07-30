@@ -9,7 +9,7 @@ function Skills() {
   const [skills, setSkills] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/skillsData')
+    axios.get('https://nadim.onrender.com/skillsData')
       .then((result) => {
         setSkills(result.data);
       })

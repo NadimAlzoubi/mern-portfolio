@@ -12,7 +12,7 @@ const FilePreview = () => {
 
   const fetchFiles = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/fsfiles');
+      const response = await axios.get('https://nadim.onrender.com/fsfiles');
       setFiles(response.data);
     } catch (err) {
       alert("Error fetching files: ", err);
@@ -22,7 +22,7 @@ const FilePreview = () => {
 
   const deleteFile = async (filename) => {
     try {
-      await axios.delete(`http://localhost:3001/fsfiles/${filename}`);
+      await axios.delete(`https://nadim.onrender.com/fsfiles/${filename}`);
       fetchFiles();
     } catch (err) {
       alert(`Error deleting ${filename}:`, err);

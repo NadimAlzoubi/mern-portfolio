@@ -9,7 +9,7 @@ function Projects() {
 
   const [projects, setProjects] = useState([])
   useEffect(()=>{
-      axios.get('http://localhost:3001/projectsData')
+      axios.get('https://nadim.onrender.com/projectsData')
       .then((result)=>{
         setProjects(result.data);
       })

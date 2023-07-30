@@ -10,7 +10,7 @@ const ProjectsData = () => {
   const [projectsData, setProjectsData] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get('http://localhost:3001/projectsData')
+    axios.get('https://nadim.onrender.com/projectsData')
       .then((result) => {
         setProjectsData(result.data);
       })
@@ -21,7 +21,7 @@ const ProjectsData = () => {
 
 
   const Delete = (projectId) => {
-    axios.delete(`http://localhost:3001/deleteprojectsdata/${projectId}`)
+    axios.delete(`https://nadim.onrender.com/deleteprojectsdata/${projectId}`)
       .then((result) => {
         console.log(result);
         alert("Deleted successfully!");
