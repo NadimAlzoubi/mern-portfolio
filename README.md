@@ -47,7 +47,7 @@ MERN Portfolio is a full-stack web application that allows users to display thei
 
 ## Usage
 
-1. Access the admin interface by visiting `/admin` in your browser.
+1. Access the admin interface by visiting `/login` in your browser.
 2. Log in using your admin credentials (defined in your `.env` file).
 3. Add, edit, or delete projects and skills as needed.
 4. The main portfolio page is accessible from the root URL.
