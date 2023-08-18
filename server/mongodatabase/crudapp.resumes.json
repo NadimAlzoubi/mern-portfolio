@@ -1,0 +1,182 @@
+[{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd404"
+  },
+  "key": "1",
+  "category": "education",
+  "title": "technichl diploma in softwate eng.",
+  "description": "technichl diploma in computer engineering with a specialzation in software engineering from damascus university.",
+  "dateFrom": "9/2020",
+  "dateTo": "6/2023",
+  "link": "/resume",
+  "linkContent": "View",
+  "logo": "fas fa-graduation-cap"
+},
+{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd405"
+  },
+  "key": "2",
+  "category": "experiences",
+  "title": "customs clerance",
+  "description": "I worked in customs clearance at Abu Dhabi Customs for 6 months. Responsible for preparing and printing customs declarations, preparing financial invoices, and dealing with e-mails, in addition to the ability to withstand extreme pressure.",
+  "dateFrom": "9/2022",
+  "dateTo": "Present",
+  "link": "hello",
+  "linkContent": "test link",
+  "logo": "fas fa-briefcase"
+},
+{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd406"
+  },
+  "key": "3",
+  "category": "experiences",
+  "title": "sales superbisor & manager",
+  "description": "I worked in my library in Syria, selling and distributing books and stationery to schools, as well as providing printing and photocopying services, personal photos, and doing all office work.",
+  "dateFrom": "2/2015",
+  "dateTo": "1/2020",
+  "link": "https://google.com",
+  "linkContent": "go to link",
+  "logo": "fas fa-briefcase"
+},
+{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd407"
+  },
+  "key": "4",
+  "category": "experiences",
+  "title": "Technical knowledge",
+  "description": "Experienced in managing and troubleshooting various technology equipment such as computers, servers, routers, repeaters, smart devices and other networking devices.Proficient in identifying and resolving technical issues, ensuring optimal system performance and uptime.Familiar with various software applications and programming languages.A quick learner who adapts to new technologies with ease.",
+  "dateFrom": "2/2015",
+  "dateTo": "1/2020",
+  "link": "nice",
+  "linkContent": "nice",
+  "logo": "fas fa-briefcase"
+},
+{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd408"
+  },
+  "key": "3",
+  "category": "courses",
+  "title": "ICDL",
+  "description": "",
+  "dateFrom": "2022",
+  "dateTo": "2022",
+  "link": "#",
+  "linkContent": "verify",
+  "logo": "fas fa-graduation-cap"
+},
+{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd409"
+  },
+  "key": "5",
+  "category": "courses",
+  "title": "Digital Markiting from Google",
+  "description": "",
+  "dateFrom": "2022",
+  "dateTo": "2022",
+  "link": "#",
+  "linkContent": "verify",
+  "logo": "fas fa-graduation-cap"
+},
+{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd40a"
+  },
+  "key": "6",
+  "category": "courses",
+  "title": "React.JS course from Udemy",
+  "description": "",
+  "dateFrom": "2022",
+  "dateTo": "2022",
+  "link": "",
+  "linkContent": "verify",
+  "logo": "fas fa-graduation-cap"
+},
+{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd40b"
+  },
+  "key": "7",
+  "category": "languages",
+  "title": "arabic",
+  "description": "Native",
+  "dateFrom": "",
+  "dateTo": "",
+  "link": "",
+  "linkContent": "",
+  "logo": "fa-solid fa-language"
+},
+{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd40c"
+  },
+  "key": "8",
+  "category": "languages",
+  "title": "english",
+  "description": "B2 - 70%",
+  "dateFrom": "",
+  "dateTo": "",
+  "link": "",
+  "linkContent": "",
+  "logo": "fa-solid fa-language"
+},
+{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd40d"
+  },
+  "key": "7",
+  "category": "interests",
+  "title": "Photography",
+  "description": "",
+  "dateFrom": "",
+  "dateTo": "",
+  "link": "",
+  "linkContent": "",
+  "logo": "fa-solid fa-image"
+},
+{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd40e"
+  },
+  "key": "8",
+  "category": "interests",
+  "title": "Designing",
+  "description": "",
+  "dateFrom": "",
+  "dateTo": "",
+  "link": "",
+  "linkContent": "",
+  "logo": "fa-solid fa-pen-ruler"
+},
+{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd40f"
+  },
+  "key": "8",
+  "category": "interests",
+  "title": "Reading",
+  "description": "",
+  "dateFrom": "",
+  "dateTo": "",
+  "link": "",
+  "linkContent": "",
+  "logo": "fa-solid fa-book-open-reader"
+},
+{
+  "_id": {
+    "$oid": "64b41bc5e2b509de57efd410"
+  },
+  "key": "8",
+  "category": "interests",
+  "title": "Technology",
+  "description": "",
+  "dateFrom": "",
+  "dateTo": "",
+  "link": "",
+  "linkContent": "",
+  "logo": "fa-solid fa-microchip"
+}]

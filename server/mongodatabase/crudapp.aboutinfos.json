@@ -1,0 +1,23 @@
+[{
+  "_id": {
+    "$oid": "64b42278e2b509de57efd41f"
+  },
+  "firstName": "Nadim",
+  "lastName": "alzoubi",
+  "dateOfBirth": "27-09-1999",
+  "aboutMe": "My objective is to secure a challenging role in the field of software engineering where I can leverage my diploma in software engineering from a purposeful technical institute, as well as my one-year experience as a technical assistant and digital technician. With my strong communication and organizational skills, I am committed to delivering exceptional results for both the company and clients.",
+  "footerAbout": "I'm a junior web developer and programmer, graduated from Damascus University and obtained a technical diploma in computer engineering",
+  "cvLink": "cv.pdf-1690650938892-779200223.pdf",
+  "address": "Al Sila' Street. Al Sila', Abu Dhabi, UAE",
+  "phone": "+971 50 443 0587",
+  "email": "nadim.alzoubi.99@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/nadim-alzoubi-b63435224",
+  "youtube": "https://youtube.com/@naz27999",
+  "facebook": "https://www.facebook.com/nadim.alzoubi.54",
+  "instagram": "https://www.instagram.com/nadim_alzoubi_99",
+  "whatsapp": "https://wa.me/+971504430587",
+  "telegram": "https://t.me/Nadim_alzoubi",
+  "personalImg": "na.png-1690652659537-797523309.png",
+  "coverImg": "na3.png-1690720573458-940118104.png",
+  "jobTitle": "programmer & designer"
+}]
